@@ -1,33 +1,4 @@
-<?php
-    
 
-    $compra = $_GET["compra"] ?? "";
-
-    include "../core/database.php";
-
-    if($_POST){
-        
-        $produto        = $_POST["produto"] ?? "";
-        $valor          = $_POST["valor"] ?? "";
-        $qtde_produto   = $_POST["valor"] ?? "";
-        //print_r($_POST);
-        if( empty($produto) ){
-            echo '<script>alert("Erro ao incluir produto");</script>';
-        } else{
-            //inserir dentro do quadrinho_personagem
-            $sql = "INSERT INTO produtos(produto, valor, qtde_produto)
-            VALUES(:produto, :valor, :qtde)";
-            $consulta = $pdo->prepare($sql);
-            $consulta->bindParam(":produto", $produto);
-            $consulta->bindParam(":valor", $valor);
-            $consulta->bindParam(":qtde", $qtde_produto);
-            
-            if (!$consulta->execute()){
-                echo '<script>alert("Não foi possível inserir o produto");</script>';
-            }
-        }
-    }
-?>
 <!DOCTYPE html>
 <html lang="pt-br">
   <head>
@@ -44,43 +15,39 @@
   
   <div class="container">
     <div class="mt-5">
-        <table class="table table-hover">
-            <thead>
-                <tr> 
-                    <td>Produtos</td>
-                    <td>Quantidade</td>
-                    <td>Valor</td>
-                    <td>Opções</td>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                    $sql = "SELECT * FROM compra_produto WHERE id_compra = :id_compra";
-                    $consulta = $pdo->prepare($sql);
-                    $consulta->bindParam(":id_compra", $compra );
-                    while ($dados = $consulta->fetch(PDO::FETCH_OBJ)){
+        <form method="post" action="inserir?id=<?=$requisicao->id;?>">
+            <div class="form-group">
+            <label for="ultima_venda">Última venda</label>
+            <input type="date" class="form-control" id="ultima_venda" name="ultima_venda" >
+          </div>
+            <div class="form-group">
+                <label for="produto">Produto</label>    
+                <select type="text" name="produto" class="form-control" list="produtos">
+
+                    <option></option>
+                    <?php
+                    $select = "SELECT * FROM produtos";
+                    $pesquisar = $pdo->prepare($select);
+                    $pesquisar->execute();
+                    
+                    while($produtos =  $pesquisar->fetch(PDO::FETCH_OBJ)){
                         
-                        
+                        echo '<option value="'.$produtos->id.'">'.$produtos->produto.'</option>';
                     }
-                ?>
-                <tr> 
-                    <td>Produto 1</td>
-                    <td>
-                        <input type="number" class="form-control col-12 col-md-2"  value="1" min="1">
-                    </td>
-                    <td>
-                        <a href="javascript:adiciona(<?=$qtde_produto;?>)" class="btn btn-info">+</a>
-                        <a href="javascript:retira(<?=$qtde_produto;?>)" class="btn btn-info">-</a>
-                    </td>
-                    <td><button type="button" class="btn btn-sm btn-danger" >Deletar</button></td>
-                </tr>
-            </tbody>
-        </table>
+                    
+                    ?>
+
+                </select>
+
+                <label for="qtde">Quantidade</label>
+                <input type="number" name="qtde" id="qtde"  class="form-control" min="1">
+            </div>
+            <button type="submit" class="btn btn-primary">Cadastrar</button>
+            <a class="btn btn-primary" href="dash">Voltar</a>
+        </form>
     </div>
   </div>
       <script>
-        
-      
       </script>
     <!-- JavaScript (Opcional) -->
     <!-- jQuery primeiro, depois Popper.js, depois Bootstrap JS -->

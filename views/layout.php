@@ -7,8 +7,7 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css">
-
-    <title>Compras</title>
+    <title>Requisição de Compras</title>
   </head>
   <body>
   

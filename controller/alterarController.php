@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__."/../core/database.php";
 $id = $_GET["id"];
-$sql = "SELECT status FROM compras WHERE id = :id LIMIT 1";
+$sql = "SELECT status FROM requisicao WHERE id = :id LIMIT 1";
 $consulta = $pdo->prepare($sql);
 $consulta->bindParam(":id",$id);
 $consulta->execute();
