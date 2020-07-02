@@ -13,12 +13,10 @@
 <?php
                 
             while($dados = $consulta->fetch(PDO::FETCH_OBJ)){
-                require_once __DIR__."/../core/functions.php";
                         $id = $dados->id;
                         $solicitante = $dados->solicitante;
                         $motivo = $dados->motivo;
                         $emissao = $dados->data_emissao;
-                        $emissao = formatar($emissao);
                         if($dados->status == 0) {
                             $status = "Pendente";
                         }else{
@@ -34,6 +32,7 @@
                         <a href="javascript:alterar(<?=$id;?>)" class="btn btn-warning btn-sm">Alterar Status</a>
                         <a type="button" class="btn btn-sm btn-danger" href="javascript:excluir(<?=$id;?>)" >Deletar</a>
                         <a type="button" class="btn btn-sm btn-info" href="visualizar?id=<?=$id;?>" >Visualizar</a>
+
                     </td>
                 </tr>
                 <?php

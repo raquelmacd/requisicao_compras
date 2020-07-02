@@ -5,20 +5,28 @@ require_once __DIR__."/../../core/database.php";
 if($_GET){
     
     $id = $_GET["id"];
-    
-    $sql = "DELETE FROM requisicao WHERE id = :id LIMIT 1";
+    $sql = "DELETE FROM produtos WHERE id = :id LIMIT 1";
     $consulta = $pdo->prepare($sql);
     $consulta->bindParam(":id",$id);
-    $consulta->execute();
     
-    $select = "DELETE FROM requisicao_produto WHERE id_requisicao = :id";
+    // BLOQUEAR EXCLUSAO DE ITENS NA REQUISICAO _PRODUTOS
+    $select = "SELECT id FROM requisicao_produto where id_produto = :id limit 1";
     $verifica = $pdo->prepare($select);
     $verifica->bindParam(":id",$id);
     $verifica->execute();
+    $dados = $verifica->fetch(PDO::FETCH_OBJ);
     
-    echo '<script>location.href="requisicao"</script>';
+    if(!empty($dados->id)){
+        echo '<script>alert("Erro ao excluir produto");history.back();</script>';
+        exit;
+    } else if ($consulta->execute()){
+
+        echo '<script>location.href="requisicao"</script>';
+    }
+    
+    echo '<script>alert("Erro");history.back();</script>';
     
     
 } else{
-    echo '<script>slert("Erro");history.back();</script>';
+    echo '<script>alert("Erro");history.back();</script>';
 }

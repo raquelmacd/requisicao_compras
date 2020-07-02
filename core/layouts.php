@@ -14,7 +14,7 @@ require_once __DIR__.'/route.php';
         foreach($route as $r){
 
           if($urlAtual==$r[0]){
-          // echo $r[1];
+          //echo $r[1];
 
           require_once __DIR__."/../controller/".$r[1].".php";
 

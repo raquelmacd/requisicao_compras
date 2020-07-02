@@ -2,15 +2,19 @@
 
 $route[]=['/','dashController'];
 $route[]=['dash','dashController'];
-$route[]=['cadastrar','cadastroController'];
-$route[]=['requisicao','reqController'];
+$route[]=['cadastrar','requisicao/cadastro'];
+$route[]=['requisicao','requisicao/listar'];
+$route[]=['alterar','requisicao/alterarStatus'];
+$route[]=['adicionar','requisicao/adicionar'];
 $route[]=['salvar','banco/salvar'];
 $route[]=['excluir','banco/excluir'];
-$route[]=['alterar','alterarController'];
-$route[]=['adicionar','adicionarController'];
 $route[]=['inserir','banco/inserir'];
-$route[]=['visualizar','vizController'];
-
+$route[]=['visualizar','requisicao/visualizar'];
+$route[]=['cadProduto','produto/cadastro'];
+$route[]=['excluirProduto','produto/excluir'];
+$route[]=['produtos','produto/listar'];
+$route[]=['inserirPro','requisicao/adicionar'];
+$route[]=['salvarProduto','produto/salvar'];
 
 
 //return $route;

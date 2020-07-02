@@ -11,11 +11,15 @@
           </div>
           <div class="form-group">
             <label for="motivo">Motivo</label>
-            <input type="text" class="form-control" id="motivo" name="motivo" placeholder="Exemplo: Estoque em falta...">
+            <input type="text" class="form-control" id="motivo" name="motivo" placeholder="Exemplo: NF1245">
           </div>
-
+            
             <button type="submit" class="btn btn-primary">Inserir Produtos</button>
             <a class="btn btn-primary" href="dash">Voltar</a>
         </form>  
     </div>
+    <?php
+         
+    ?>
+    
 </div>
